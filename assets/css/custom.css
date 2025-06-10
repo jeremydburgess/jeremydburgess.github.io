@@ -11,3 +11,22 @@ header.page-header {
 header.page-header h1 {
   color: #ffffff;
 }
+
+.page-header {
+  padding: 1rem 1rem; /* Reduce top/bottom space */
+  min-height: auto;   /* Remove fixed min height */
+}
+
+
+.page-nav {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.page-nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
