@@ -1,5 +1,17 @@
 title: Jeremy Burgess
 description: Professional website of Jeremy Burgess
-remote_theme: pages-themes/cayman@v0.2.0
-plugins:
-  - jekyll-remote-theme
+
+theme: null  # disable remote theme to allow layout override
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      css: "/assets/css/custom.css"
+
+# remote_theme: pages-themes/cayman@v0.2.0
+# plugins:
+#   - jekyll-remote-theme
+
+author: Jeremy Burgess
