@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/assets/css/custom.css">
+
 ---
 layout: default
 title: Jeremy Burgess
