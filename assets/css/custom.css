@@ -1,10 +1,10 @@
-body {
+/*body {
   background-color: #452244;
-}
+} */
 
 /* Override Cayman top banner background */
 header.page-header {
-  background-image: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+  background-image: linear-gradient(120deg, #452244 0%, #19547b 100%);
 }
 
 /* Optional: change site title color */
