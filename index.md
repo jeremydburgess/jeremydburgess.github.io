@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="/assets/css/custom.css">
-
----
+--
 layout: default
 title: Jeremy Burgess
 ---
+
+<link rel="stylesheet" href="/assets/css/custom.css">
 
 # Welcome
 
