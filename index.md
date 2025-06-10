@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Jeremy Burgess
-theme: jekyll-theme-architect
 ---
 
 # Welcome
