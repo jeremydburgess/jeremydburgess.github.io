@@ -30,15 +30,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   max-width: 1000px;
   margin: 0 auto;
   overflow: hidden;
+  min-width: 0;;
 }
 
 .site-title {
-  flex-shrink: 0;
+  flex-shrink: 1;
   white-space: nowrap;
   font-size: 1.25rem;
   font-weight: bold;
@@ -46,7 +47,10 @@ body {
   color: white;
   margin: 0 1rem;
   flex-grow: 1;
-  text-align: center;
+  text-align: left;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .site-title:visited {
@@ -96,6 +100,10 @@ body {
   flex-shrink: 0;
 }
 
+.site-logo {
+  flex-shrink: 0;
+}
+
 .hamburger {
   display: none;
 }
@@ -122,15 +130,24 @@ footer {
   .header-content {
     flex-direction: row;
     align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 0 1.25rem;
   }
 
   .site-title {
     order: 1;
-    flex-grow: 1;
-    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.25rem;
   }
 
 .hamburger {
+  display: block; /* ← This is the missing piece */
   font-size: 1.5rem;
   background: none;
   border: none;
@@ -138,6 +155,7 @@ footer {
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   order: 0
+  flex-shrink: 0;
 }
 
   .nav-links {
@@ -159,7 +177,7 @@ footer {
   }
 
  .logo-spacer {
-  width: 60px;
+  width: 0px;
   flex-shrink: 0;
   visibility: hidden;
   pointer-events: none;
@@ -180,11 +198,34 @@ footer {
     opacity: 1;
     pointer-events: auto;
   }
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* ← prevent wrapping */
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
+}
 
-@media (min-width: 621px) {
+@media (max-width: 400px) {
+  .site-header {
+    padding: 0.5rem;
+  }
+
+  .site-title {
+    font-size: 1rem;
+  }
+
+  .site-logo img {
+    height: 40px;
+  }
+
   .hamburger {
-    display: none;
+    font-size: 1.2rem;
   }
 }
