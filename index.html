@@ -31,16 +31,16 @@
     </div>
 
     <!-- Navigation Links -->
-   <div class="nav-container">
-    <nav class="nav-links" id="nav-links">
-      <a href="cv.html">CV</a>
-      <a href="research.html">Research</a>
-      <a href="publications.html">Publications</a>
-      <a href="tools.html">Lab Tools</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
- </header>
+    <div class="nav-container">
+      <nav class="nav-links" id="nav-links">
+        <a href="cv.html">CV</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="tools.html">Lab Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- ========== MAIN CONTENT ========== -->
   <main class="page-content">
@@ -56,19 +56,17 @@
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
-  <!-- ========== JS: Toggle Nav Links on Mobile ========== -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleBtn = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const header = document.querySelector('.site-header');
+  <!-- ========== JS: Mobile Menu Toggle ========== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
 
-    toggleBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      header.classList.toggle('expanded');
+      toggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>

@@ -14,7 +14,7 @@ body {
 }
 
 
-/* === HEADER STYLING === */
+/* === HEADER === */
 .site-header {
   position: relative;
   width: 100%;
@@ -64,7 +64,7 @@ body {
 }
 
 
-/* === NAVIGATION LINKS === */
+/* === NAVIGATION === */
 .nav-links {
   display: flex;
   flex-wrap: wrap;
@@ -90,10 +90,11 @@ body {
 }
 
 .nav-container {
-  max-width: 1000px;  /* Match .header-content and .page-content max-width */
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
 }
+
 
 /* === LOGO === */
 .site-logo {
@@ -107,7 +108,7 @@ body {
 }
 
 .logo-spacer {
-  width: 80px;  /* match or slightly exceed logo */
+  width: 80px;
   flex-shrink: 0;
   visibility: hidden;
   pointer-events: none;
@@ -116,11 +117,11 @@ body {
 
 /* === HAMBURGER BUTTON === */
 .hamburger {
-  display: none; /* hidden on desktop */
+  display: none; /* Hidden on desktop */
 }
 
 
-/* === PAGE CONTENT === */
+/* === MAIN CONTENT === */
 .page-content {
   flex: 1;
   max-width: 950px;
@@ -139,14 +140,14 @@ footer {
 }
 
 
-/* === MOBILE STYLES === */
+/* === MOBILE STYLES (≤ 620px) === */
 @media (max-width: 620px) {
   .site-header {
     position: static;
   }
 
   .header-content {
-    padding-left: 0 0.25rem;
+    padding-left: 0.25rem;
     padding-right: 1.25rem;
     gap: 0.5rem;
   }
@@ -171,23 +172,22 @@ footer {
     color: white;
     cursor: pointer;
     padding: 0.1rem 0.3rem;
-    margin: 0;
-    margin-right: 0.5rem
+    margin-right: 0.5rem;
     order: 0;
     flex-shrink: 0;
   }
 
   .nav-links {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0; /* Collapse vertical height when hidden */
+  }
 
   .nav-links.open {
-    max-height: 500px;
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
+    font-size: 1rem;
   }
 
   .logo-spacer {
@@ -201,16 +201,12 @@ footer {
 }
 
 
-/* === NARROW SCREEN FINE-TUNING === */
+/* === EXTRA NARROW STYLES (≤ 400px) === */
 @media (max-width: 400px) {
-.site-header {
-  padding: 0rem 0rem; /* Smaller height when collapsed */
-  transition: padding 0.3s ease;
-}
-
-.site-header.expanded {
-  padding-bottom: 2.5rem; /* Increase height when nav is open */
-}
+  .site-header {
+    padding: 0rem;
+    transition: padding 0.3s ease;
+  }
 
   .site-title {
     font-size: 1rem;
@@ -225,6 +221,9 @@ footer {
   }
 }
 
-/* * {
+/* Debugging visual aid — uncomment if needed */
+/*
+* {
   outline: 1px dashed red;
-} */
+}
+*/
