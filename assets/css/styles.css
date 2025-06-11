@@ -1,51 +1,98 @@
- body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      color: #333;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+  }
 
-    .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: linear-gradient(120deg, #452244 0%, #452244 50%, #19547b 100%);
-      color: white;
-      padding: 1rem;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+  .site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(120deg, #452244 0%, #452244 50%, #19547b 100%);
+    color: white;
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: opacity 0.3s ease;
-    }
+.site-title {
+  flex-shrink: 0; /* Prevent title from shrinking */
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  white-space: nowrap; /* Prevent it from wrapping onto multiple lines */
+}
 
-    .nav-links a:hover {
-      opacity: 0.75;
-    }
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-grow: 1; /* Take up remaining horizontal space */
+  min-width: 0; /* Prevent flexbox from blowing up on narrow windows */
+  overflow: hidden;
+}
 
-    .page-content {
-      padding: 6rem 1.5rem 3rem 1.5rem; /* Top padding accounts for fixed header */
-      max-width: 800px;
-      margin: 0 auto;
-    }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    footer {
-      background-color: #452244;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #e9ecef;
-    }
+  .nav-links a:hover {
+    opacity: 0.75;
+  }
 
+ /* Top padding for fixed header */
+.page-content {
+  padding: 6rem 1.5rem 3rem 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Footer stays simple */
+footer {
+  background-color: #e9ecef;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* MOBILE OVERRIDE */
+@media (max-width: 600px) {
+  .site-header {
+    position: static; /* Not fixed on mobile */
+    text-align: center;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .site-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .page-content {
+    padding-top: 2rem; /* Less padding needed when header isn't fixed */
+  }
+}
