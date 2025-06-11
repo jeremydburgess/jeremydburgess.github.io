@@ -178,14 +178,11 @@ footer {
   }
 
   .nav-links {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-height: 0;
-    opacity: 0;
-    pointer-events: none;
-    margin-bottom: 0.5rem;
-  }
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
 
   .nav-links.open {
     max-height: 500px;
@@ -206,9 +203,14 @@ footer {
 
 /* === NARROW SCREEN FINE-TUNING === */
 @media (max-width: 400px) {
-  .site-header {
-    padding: 0.5rem;
-  }
+.site-header {
+  padding: 0rem 0rem; /* Smaller height when collapsed */
+  transition: padding 0.3s ease;
+}
+
+.site-header.expanded {
+  padding-bottom: 2.5rem; /* Increase height when nav is open */
+}
 
   .site-title {
     font-size: 1rem;

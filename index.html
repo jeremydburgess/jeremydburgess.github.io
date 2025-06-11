@@ -57,16 +57,18 @@
   </footer>
 
   <!-- ========== JS: Toggle Nav Links on Mobile ========== -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggleBtn = document.getElementById("menu-toggle");
-      const navLinks = document.getElementById("nav-links");
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const header = document.querySelector('.site-header');
 
-      toggleBtn.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
-      });
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      header.classList.toggle('expanded');
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
