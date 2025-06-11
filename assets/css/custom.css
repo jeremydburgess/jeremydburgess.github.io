@@ -1,28 +1,51 @@
-/* Shrink header */
-.page-header {
-  padding: 0.5rem 1rem;
-  min-height: auto;
-}
+ body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
 
-/* Gradient override (customize these!) */
-.page-header {
-  background: linear-gradient(120deg, #452244 0%, #19547b 100%;
-  color: #fff;
-}
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(120deg, #452244 0%, #452244 70%, #19547b 100%);
+      color: white;
+      padding: 1rem;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-/* Footer styling */
-.custom-footer {
-  background: linear-gradient(120deg, #452244 0%, #19547b 100%;
-  padding: 10px;
-  margin-top: 40px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #555;
-  border-top: 1px solid #ccc;
-}
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-/* Optional: change site title color 
-header.page-header h1 {
-  color: #ffffff;
-}
-*/
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.75;
+    }
+
+    .page-content {
+      padding: 6rem 1.5rem 3rem 1.5rem; /* Top padding accounts for fixed header */
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #452244;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #e9ecef;
+    }
+
