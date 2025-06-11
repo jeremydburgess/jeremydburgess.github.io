@@ -87,7 +87,7 @@ footer {
 }
 
 /* MOBILE OVERRIDE */
-@media (max-width: 600px) {
+@media (max-width: 620px) {
   .site-header {
     position: static; /* Not fixed on mobile */
     text-align: center;
@@ -98,9 +98,10 @@ footer {
     align-items: center;
   }
 
-  .site-title {
-    margin-bottom: 0.75rem;
+   .site-title {
+    margin: 0 0 0.75rem 0; /* Remove any auto or directional margin */
   }
+
 
   .nav-links {
     justify-content: center;
