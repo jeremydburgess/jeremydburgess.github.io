@@ -17,26 +17,25 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    overflow-x: hidden;
-  }
+ .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
 
 .site-title {
-  flex-shrink: 0; /* Prevent title from shrinking */
+  flex-shrink: 0;
+  white-space: nowrap;
   font-size: 1.25rem;
   font-weight: bold;
   text-decoration: none;
   color: white;
-  white-space: nowrap; /* Prevent it from wrapping onto multiple lines */
-  margin-right: auto; /* push nav to the right */
-  }
+}
 
 .site-title:visited {
   color: white;
@@ -51,20 +50,19 @@ body {
 .nav-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
-  flex-grow: 1; /* Take up remaining horizontal space */
-  min-width: 0; /* Prevent flexbox from blowing up on narrow windows */
+  flex-grow: 1;
+  min-width: 0;
   overflow: hidden;
 }
 
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
+.nav-links a {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: white;
+  text-decoration: none;
+}
 
   .nav-links a:hover {
     opacity: 0.75;
@@ -77,6 +75,12 @@ body {
   margin: 0 auto;
 }
 
+.site-logo img {
+  height: 48px;
+  width: auto;
+  flex-shrink: 0;
+}
+
 /* Footer stays simple */
 footer {
   background-color: #e9ecef;
@@ -86,28 +90,51 @@ footer {
   color: #555;
 }
 
+.logo-spacer {
+  width: 48px;  /* match or slightly exceed the logo width */
+  flex-shrink: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* MOBILE OVERRIDE */
 @media (max-width: 620px) {
-  .site-header {
-    position: static; /* Not fixed on mobile */
-    text-align: center;
-  }
-
   .header-content {
     flex-direction: column;
     align-items: center;
   }
 
-   .site-title {
-    margin: 0 0 0.75rem 0; /* Remove any auto or directional margin */
+  .site-title {
+    margin-bottom: 0.5rem;
   }
-
 
   .nav-links {
     justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .site-logo {
+    display: none;
+  }
+}
+
+  .site-header {
+    position: static;
   }
 
   .page-content {
-    padding-top: 2rem; /* Less padding needed when header isn't fixed */
+    padding-top: 2rem;
+  }
+}
+
+/* Bigger logo on larger screens only */
+@media (min-width: 621px) {
+  .site-logo img {
+    height: 64px;
+  }
+}
+
+ .logo-spacer {
+    display: none;
   }
 }
