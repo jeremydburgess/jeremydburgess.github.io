@@ -36,6 +36,16 @@ body {
   white-space: nowrap; /* Prevent it from wrapping onto multiple lines */
 }
 
+.site-title:visited {
+  color: white;
+}
+
+.site-title:hover,
+.site-title:focus {
+  opacity: 0.85; /* Optional subtle effect */
+  text-decoration: none;
+}
+
 .nav-links {
   display: flex;
   flex-wrap: wrap;
