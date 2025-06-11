@@ -3,55 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css" />
   <title>Home | Jeremy Burgess</title>
-  </head>
+</head>
+
 <body>
 
-  <!-- HEADER -->
-<header class="site-header">
-  <div class="header-content">
-<button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
-  ☰
-</button>
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="header-content">
 
-    <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
+      <!-- Hamburger for mobile menu -->
+      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
+        ☰
+      </button>
 
-   <a href="index.html" class="site-logo">
-  <img src="assets/image/white.svg" alt="Site logo" />
-</a>
-<div class="logo-spacer"></div>
-  </div>
+      <!-- Site Title -->
+      <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
 
-  <nav class="nav-links" id="nav-links">
-    <a href="cv.html">CV</a>
-    <a href="research.html">Research</a>
-    <a href="publications.html">Publications</a>
-    <a href="tools.html">Lab Tools</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+      <!-- Site Logo -->
+      <a href="index.html" class="site-logo">
+        <img src="assets/image/white.svg" alt="Site logo" />
+      </a>
 
-  <!-- MAIN CONTENT -->
+      <!-- Spacer to maintain layout balance -->
+      <div class="logo-spacer"></div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav-links" id="nav-links">
+      <a href="cv.html">CV</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="tools.html">Lab Tools</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="page-content">
     <h1>Welcome</h1>
-    <p>Hello! I'm Jeremy Burgess, a scientist working at the intersection of neuroscience, genomics, and disease modeling. This site shares my research interests, publications, tools, and contact info.</p>
+    <p>
+      Hello! I'm Jeremy Burgess, a scientist working at the intersection of neuroscience, genomics, and disease modeling. 
+      This site shares my research interests, publications, tools, and contact info.
+    </p>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ========== FOOTER ========== -->
   <footer>
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleBtn = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
+  <!-- ========== JS: Toggle Nav Links on Mobile ========== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleBtn = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
 
-    toggleBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+      toggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
     });
-  });
-</script>
+  </script>
+
 </body>
 </html>
