@@ -3,32 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeremy Burgess</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Home | Jeremy Burgess</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #452244, #007acc);
+      color: white;
+      padding: 1rem;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.75;
+    }
+
+    .page-content {
+      padding: 6rem 1.5rem 3rem 1.5rem; /* Top padding accounts for fixed header */
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #e9ecef;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Include header -->
-  <div id="header"></div>
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="cv.html">CV</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="tools.html">Lab Tools</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-  <main style="padding: 2rem;">
+  <!-- MAIN CONTENT -->
+  <main class="page-content">
     <h1>Welcome</h1>
-    <p>Hello! I'm Jeremy Burgess — a researcher in neuroscience. This site includes my CV, research interests, publications, and useful lab tools…</p>
+    <p>Hello! I'm Jeremy Burgess, a scientist working at the intersection of neuroscience, genomics, and disease modeling. This site shares my research interests, publications, tools, and contact info.</p>
   </main>
 
-  <!-- Include footer -->
-  <div id="footer"></div>
-
-  <script>
-    async function loadIncludes() {
-      const header = await fetch('includes/header.html').then(r => r.text());
-      document.getElementById('header').innerHTML = header;
-
-      const footer = await fetch('includes/footer.html').then(r => r.text());
-      document.getElementById('footer').innerHTML = footer;
-    }
-    loadIncludes();
-  </script>
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Jeremy Burgess. All rights reserved.
+  </footer>
 
 </body>
 </html>
