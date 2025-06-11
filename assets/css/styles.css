@@ -76,7 +76,7 @@ body {
 }
 
 .site-logo img {
-  height: 48px;
+  height: 60px;
   width: auto;
   flex-shrink: 0;
 }
@@ -91,7 +91,7 @@ footer {
 }
 
 .logo-spacer {
-  width: 48px;  /* match or slightly exceed the logo width */
+  width: 80px;  /* match or slightly exceed the logo width */
   flex-shrink: 0;
   visibility: hidden;
   pointer-events: none;
@@ -116,7 +116,7 @@ footer {
   .site-logo {
     display: none;
   }
-}
+
 
   .site-header {
     position: static;
@@ -125,14 +125,6 @@ footer {
   .page-content {
     padding-top: 2rem;
   }
-}
-
-/* Bigger logo on larger screens only */
-@media (min-width: 621px) {
-  .site-logo img {
-    height: 64px;
-  }
-}
 
  .logo-spacer {
     display: none;
