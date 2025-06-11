@@ -16,7 +16,7 @@ body {
   }
 
   .site-header {
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
     background: linear-gradient(120deg, #452244 0%, #452244 50%, #19547b 100%);
@@ -44,6 +44,9 @@ body {
   font-weight: bold;
   text-decoration: none;
   color: white;
+  margin: 0 1rem;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .site-title:visited {
@@ -60,10 +63,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-grow: 1;
   min-width: 0;
   overflow: hidden;
+  padding-top: 0.75rem;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
 .nav-links a {
@@ -91,6 +96,11 @@ body {
   flex-shrink: 0;
 }
 
+.hamburger {
+  display: none;
+}
+
+
 /* Footer stays simple */
 footer {
   background-color: #e9ecef;
@@ -110,13 +120,25 @@ footer {
 /* MOBILE OVERRIDE */
 @media (max-width: 620px) {
   .header-content {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
 
   .site-title {
-    margin-bottom: 0.5rem;
+    order: 1;
+    flex-grow: 1;
+    text-align: center;
   }
+
+.hamburger {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  order: 0
+}
 
   .nav-links {
     justify-content: center;
@@ -124,7 +146,7 @@ footer {
   }
 
   .site-logo {
-    display: none;
+    order: 2;
   }
 
 
@@ -137,6 +159,32 @@ footer {
   }
 
  .logo-spacer {
+  width: 60px;
+  flex-shrink: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-links.open {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+@media (min-width: 621px) {
+  .hamburger {
     display: none;
   }
 }
