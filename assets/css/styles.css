@@ -1,31 +1,51 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
-  color: #333;
-}
+ body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
 
-.site-header {
-  background: linear-gradient(90deg, #452244, #007acc);
-  color: white;
-  padding: 1rem;
-  text-align: center;
-}
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(120deg, #452244 0%, #452244 70%, #19547b 100%);
+      color: white;
+      padding: 1rem;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.nav a {
-  margin: 0 1rem;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-.site-footer {
-  background-color: #452244;
-  color: white;
-  text-align: center;
-  padding: 0.75rem;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.75;
+    }
+
+    .page-content {
+      padding: 6rem 1.5rem 3rem 1.5rem; /* Top padding accounts for fixed header */
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #452244;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #e9ecef;
+    }
+
