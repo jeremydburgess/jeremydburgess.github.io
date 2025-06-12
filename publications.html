@@ -31,17 +31,20 @@
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-content">
-      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">☰</button>
+  <!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container header-row">
+    <!-- Left: Hamburger, Title, Nav -->
+    <div class="header-left">
+      <!-- Hamburger for mobile -->
+      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
+        <span class="hamburger-icon">☰</span>
+      </button>
+
+      <!-- Title -->
       <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
-      <a href="index.html" class="site-logo">
-        <img src="assets/image/white.svg" alt="Site logo" />
-      </a>
-      <div class="logo-spacer"></div>
-    </div>
-    <div class="nav-container">
+
+      <!-- Navigation (ID is important!) -->
       <nav class="nav-links" id="nav-links">
         <a href="cv.html">CV</a>
         <a href="research.html">Research</a>
@@ -50,7 +53,16 @@
         <a href="contact.html">Contact</a>
       </nav>
     </div>
-  </header>
+
+    <!-- Right: Logo -->
+    <div class="header-right">
+      <a href="index.html" class="site-logo">
+        <img src="assets/image/white.svg" alt="Site logo" />
+      </a>
+    </div>
+  </div>
+</header>
+
 
   <!-- MAIN CONTENT -->
   <main class="page-content">
@@ -71,6 +83,8 @@
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
+
+  
   <script>
     const publications = [{"PMID":33480174,"Title":"Integrative functional genomic analysis of intron retention in human and mouse brain with Alzheimer's disease","Authors":"Li HD, Funk CC, McFarland K, Dammer EB, Allen M, Carrasquillo MM, Levites Y, Chakrabarty P, Burgess JD, Wang X, Dickson D, Seyfried NT, Duong DM, Lah JJ, Younkin SG, Levey AI, Omenn GS, Ertekin-Taner N, Golde TE, Price ND.","Citation":"Alzheimers Dement. 2021 Jun;17(6):984-1004. doi: 10.1002/alz.12254. Epub 2021 Jan 21.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"},{"PMID":32755048,"Title":"Genome-wide transcriptome analysis identifies novel dysregulated genes implicated in Alzheimer's pathology","Authors":"Nho K, Nudelman K, Allen M, Hodges A, Kim S, Risacher SL, Apostolova LG, Lin K, Lunnon K, Wang X, Burgess JD, Ertekin-Taner N, Petersen RC, Wang L, Qi Z, He A, Neuhaus I, Patel V, Foroud T, Faber KM, Lovestone S, Simmons A, Weiner MW, Saykin AJ; Alzheimer's Disease Neuroimaging Initiative.","Citation":"Alzheimers Dement. 2020 Sep;16(9):1213-1223. doi: 10.1002/alz.12092. Epub 2020 Aug 5.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"}];
 
@@ -115,12 +129,24 @@
       });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById("menu-toggle").addEventListener("click", () => {
-        document.getElementById("nav-links").classList.toggle("open");
-      });
-      renderPublications();
-    });
-  </script>
+     <!-- ========== JS: Mobile Menu Toggle ========== -->
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+  const icon = toggleBtn.querySelector(".hamburger-icon");
+
+  toggleBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+
+    // Swap icon
+    icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+  });
+});
+</script>
+
+ 
+
+
+
 </body>
 </html>
