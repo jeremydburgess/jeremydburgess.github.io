@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Publications | Jeremy Burgess</title>
+  <style>
+    .filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .filter-options label {
+      cursor: pointer;
+    }
+    .publication-group {
+      margin-bottom: 2rem;
+    }
+    .publication {
+      margin-bottom: 1rem;
+    }
+    .group-heading {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 2rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-content">
+      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">☰</button>
+      <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
+      <a href="index.html" class="site-logo">
+        <img src="assets/image/white.svg" alt="Site logo" />
+      </a>
+      <div class="logo-spacer"></div>
+    </div>
+    <div class="nav-container">
+      <nav class="nav-links" id="nav-links">
+        <a href="cv.html">CV</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="tools.html">Lab Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-content">
+    <h1>Publications</h1>
+
+    <div class="filter-options">
+      <label><input type="radio" name="grouping" value="all" checked /> All</label>
+      <label><input type="radio" name="grouping" value="CareerStage" /> By Career Stage</label>
+      <label><input type="radio" name="grouping" value="Lab" /> By Lab</label>
+      <label><input type="radio" name="grouping" value="topic" /> By Topic</label>
+    </div>
+
+    <div id="publication-list"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Jeremy Burgess. All rights reserved.
+  </footer>
+
+  <script>
+    const publications = [{"PMID":33480174,"Title":"Integrative functional genomic analysis of intron retention in human and mouse brain with Alzheimer's disease","Authors":"Li HD, Funk CC, McFarland K, Dammer EB, Allen M, Carrasquillo MM, Levites Y, Chakrabarty P, Burgess JD, Wang X, Dickson D, Seyfried NT, Duong DM, Lah JJ, Younkin SG, Levey AI, Omenn GS, Ertekin-Taner N, Golde TE, Price ND.","Citation":"Alzheimers Dement. 2021 Jun;17(6):984-1004. doi: 10.1002/alz.12254. Epub 2021 Jan 21.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"},{"PMID":32755048,"Title":"Genome-wide transcriptome analysis identifies novel dysregulated genes implicated in Alzheimer's pathology","Authors":"Nho K, Nudelman K, Allen M, Hodges A, Kim S, Risacher SL, Apostolova LG, Lin K, Lunnon K, Wang X, Burgess JD, Ertekin-Taner N, Petersen RC, Wang L, Qi Z, He A, Neuhaus I, Patel V, Foroud T, Faber KM, Lovestone S, Simmons A, Weiner MW, Saykin AJ; Alzheimer's Disease Neuroimaging Initiative.","Citation":"Alzheimers Dement. 2020 Sep;16(9):1213-1223. doi: 10.1002/alz.12092. Epub 2020 Aug 5.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"}];
+
+    function renderPublications(groupBy = null) {
+      const container = document.getElementById('publication-list');
+      container.innerHTML = '';
+
+      let grouped = {};
+      if (!groupBy || groupBy === 'all') {
+        grouped['All Publications'] = publications;
+      } else {
+        publications.forEach(pub => {
+          const key = pub[groupBy] || 'Other';
+          if (!grouped[key]) grouped[key] = [];
+          grouped[key].push(pub);
+        });
+      }
+
+      for (const [group, pubs] of Object.entries(grouped)) {
+        const groupEl = document.createElement('div');
+        groupEl.classList.add('publication-group');
+
+        const heading = document.createElement('div');
+        heading.classList.add('group-heading');
+        heading.textContent = group;
+        groupEl.appendChild(heading);
+
+        pubs.forEach(pub => {
+          const div = document.createElement('div');
+          div.classList.add('publication');
+          div.innerHTML = `<strong>${pub.Title}</strong><br><em>${pub.Authors}</em><br>${pub.Citation}`;
+          groupEl.appendChild(div);
+        });
+
+        container.appendChild(groupEl);
+      }
+    }
+
+    document.querySelectorAll('input[name="grouping"]').forEach(radio => {
+      radio.addEventListener('change', e => {
+        renderPublications(e.target.value);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById("menu-toggle").addEventListener("click", () => {
+        document.getElementById("nav-links").classList.toggle("open");
+      });
+      renderPublications();
+    });
+  </script>
+</body>
+</html>
