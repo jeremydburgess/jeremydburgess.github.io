@@ -10,34 +10,35 @@
 <body>
 
   <!-- ========== HEADER ========== -->
- <header class="site-header">
-  <div class="container header-content">
+<header class="site-header">
+  <div class="container header-row">
+    <!-- Left: Hamburger, Title, Nav -->
+    <div class="header-left">
+      <!-- Hamburger for mobile -->
+      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
+        <span class="hamburger-icon">☰</span>
+      </button>
 
-    <!-- Hamburger for mobile -->
-  <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
-  <span class="hamburger-icon">☰</span>
-</button>
+      <!-- Title -->
+      <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
 
-    <!-- Title -->
-    <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
+      <!-- Navigation (ID is important!) -->
+      <nav class="nav-links" id="nav-links">
+        <a href="cv.html">CV</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="tools.html">Lab Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
 
-    <!-- Logo -->
-    <a href="index.html" class="site-logo">
-      <img src="assets/image/white.svg" alt="Site logo" />
-    </a>
-
-    <!-- Spacer -->
-    <div class="logo-spacer"></div>
+    <!-- Right: Logo -->
+    <div class="header-right">
+      <a href="index.html" class="site-logo">
+        <img src="assets/image/white.svg" alt="Site logo" />
+      </a>
+    </div>
   </div>
-
-  <!-- Navigation (ID is important!) -->
-  <nav class="container nav-links" id="nav-links">
-    <a href="cv.html">CV</a>
-    <a href="research.html">Research</a>
-    <a href="publications.html">Publications</a>
-    <a href="tools.html">Lab Tools</a>
-    <a href="contact.html">Contact</a>
-  </nav>
 </header>
 
   <!-- ========== MAIN CONTENT ========== -->
