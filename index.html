@@ -55,21 +55,5 @@
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
-  <!-- ========== JS: Mobile Menu Toggle ========== -->
- <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-  const icon = toggleBtn.querySelector(".hamburger-icon");
-
-  toggleBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-
-    // Swap icon
-    icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
-  });
-});
-</script>
-
 </body>
 </html>
