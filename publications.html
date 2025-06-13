@@ -20,14 +20,27 @@
     }
     .publication {
       margin-bottom: 1rem;
+      /* Ensure block or flex for height calculation */
+      display: block;
+      overflow: hidden;
+      /* Remove max-height and use height transition in .publication-content */
     }
     .group-heading {
       font-size: 1.25rem;
       font-weight: bold;
       margin-top: 2rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
     }
+
+    .triangle {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      margin-right: 0.5rem;
+    }
+
   </style>
 </head>
 <body>
@@ -83,53 +96,779 @@
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
+<script>
+const publications = [
+  {
+    "PMID": 33480174,
+    "Title": "Integrative functional genomic analysis of intron retention in human and mouse brain with Alzheimer's disease",
+    "Authors": "Li HD, Funk CC, McFarland K, Dammer EB, Allen M, Carrasquillo MM, Levites Y, Chakrabarty P, Burgess JD, Wang X, Dickson D, Seyfried NT, Duong DM, Lah JJ, Younkin SG, Levey AI, Omenn GS, Ertekin-Taner N, Golde TE, Price ND.",
+    "Citation": "Alzheimers Dement. 2021 Jun;17(6):984-1004. doi: 10.1002/alz.12254. Epub 2021 Jan 21.",
+    "FirstAuthor": "Li HD",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2021,
+    "CreateDate": "2021-01-22",
+    "PMCID": "PMC8248162",
+    "NIHMSID": "",
+    "DOI": "10.1002/alz.12254",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
 
-  
-  <script>
-    const publications = [{"PMID":33480174,"Title":"Integrative functional genomic analysis of intron retention in human and mouse brain with Alzheimer's disease","Authors":"Li HD, Funk CC, McFarland K, Dammer EB, Allen M, Carrasquillo MM, Levites Y, Chakrabarty P, Burgess JD, Wang X, Dickson D, Seyfried NT, Duong DM, Lah JJ, Younkin SG, Levey AI, Omenn GS, Ertekin-Taner N, Golde TE, Price ND.","Citation":"Alzheimers Dement. 2021 Jun;17(6):984-1004. doi: 10.1002/alz.12254. Epub 2021 Jan 21.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"},{"PMID":32755048,"Title":"Genome-wide transcriptome analysis identifies novel dysregulated genes implicated in Alzheimer's pathology","Authors":"Nho K, Nudelman K, Allen M, Hodges A, Kim S, Risacher SL, Apostolova LG, Lin K, Lunnon K, Wang X, Burgess JD, Ertekin-Taner N, Petersen RC, Wang L, Qi Z, He A, Neuhaus I, Patel V, Foroud T, Faber KM, Lovestone S, Simmons A, Weiner MW, Saykin AJ; Alzheimer's Disease Neuroimaging Initiative.","Citation":"Alzheimers Dement. 2020 Sep;16(9):1213-1223. doi: 10.1002/alz.12092. Epub 2020 Aug 5.","CareerStage":"Research Technician","Lab":"Mayo Clinic - Ertekin-Taner Lab","topic":"Alzheimer's and dementia"}];
+  {
+    "PMID": 32755048,
+    "Title": "Genome-wide transcriptome analysis identifies novel dysregulated genes implicated in Alzheimer's pathology",
+    "Authors": "Nho K, Nudelman K, Allen M, Hodges A, Kim S, Risacher SL, Apostolova LG, Lin K, Lunnon K, Wang X, Burgess JD, Ertekin-Taner N, Petersen RC, Wang L, Qi Z, He A, Neuhaus I, Patel V, Foroud T, Faber KM, Lovestone S, Simmons A, Weiner MW, Saykin AJ; Alzheimer's Disease Neuroimaging Initiative.",
+    "Citation": "Alzheimers Dement. 2020 Sep;16(9):1213-1223. doi: 10.1002/alz.12092. Epub 2020 Aug 5.",
+    "FirstAuthor": "Nho K",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2020,
+    "CreateDate": "2020-08-06",
+    "PMCID": "PMC7541709",
+    "NIHMSID": "NIHMS1626159",
+    "DOI": "10.1002/alz.12092",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
 
-    function renderPublications(groupBy = null) {
-      const container = document.getElementById('publication-list');
-      container.innerHTML = '';
+  {
+    "PMID": 32400971,
+    "Title": "MAPT haplotype-stratified GWAS reveals differential association for AD risk variants",
+    "Authors": "Strickland SL, Reddy JS, Allen M, N'songo A, Burgess JD, Corda MM, Ballard T, Wang X, Carrasquillo MM, Biernacka JM, Jenkins GD, Mukherjee S, Boehme K, Crane P, Kauwe JS, Ertekin-Taner N; Alzheimer's Disease Genetics Consortium.",
+    "Citation": "Alzheimers Dement. 2020 Jul;16(7):983-1002. doi: 10.1002/alz.12099. Epub 2020 May 13.",
+    "FirstAuthor": "Strickland SL",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2020,
+    "CreateDate": "2020-05-14",
+    "PMCID": "PMC7983911",
+    "NIHMSID": "NIHMS1681915",
+    "DOI": "10.1002/alz.12099",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
 
-      let grouped = {};
-      if (!groupBy || groupBy === 'all') {
-        grouped['All Publications'] = publications;
-      } else {
-        publications.forEach(pub => {
-          const key = pub[groupBy] || 'Other';
+  {
+    "PMID": 30422133,
+    "Title": "Genetically elevated high-density lipoprotein cholesterol through the cholesteryl ester transfer protein gene does not associate with risk of Alzheimer's disease",
+    "Authors": "Peloso GM, van der Lee SJ; International Genomics of Alzheimer's Project (IGAP); Destefano AL, Seshardi S.",
+    "Citation": "Alzheimers Dement (Amst). 2018 Sep 22;10:595-598. doi: 10.1016/j.dadm.2018.08.008. eCollection 2018.",
+    "FirstAuthor": "Peloso GM",
+    "JournalBook": "Alzheimers Dement (Amst)",
+    "PublicationYear": 2018,
+    "CreateDate": "2018-11-14",
+    "PMCID": "PMC6215982",
+    "NIHMSID": "",
+    "DOI": "10.1016/j.dadm.2018.08.008",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 30326945,
+    "Title": "ABI3 and PLCG2 missense variants as risk factors for neurodegenerative diseases in Caucasians and African Americans",
+    "Authors": "Conway OJ, Carrasquillo MM, Wang X, Bredenberg JM, Reddy JS, Strickland SL, Younkin CS, Burgess JD, Allen M, Lincoln SJ, Nguyen T, Malphrus KG, Soto AI, Walton RL, Boeve BF, Petersen RC, Lucas JA, Ferman TJ, Cheshire WP, van Gerpen JA, Uitti RJ, Wszolek ZK, Ross OA, Dickson DW, Graff-Radford NR, Ertekin-Taner N.",
+    "Citation": "Mol Neurodegener. 2018 Oct 11;13(1):53. doi: 10.1186/s13024-018-0289-x.",
+    "FirstAuthor": "Conway OJ",
+    "JournalBook": "Mol Neurodegener",
+    "PublicationYear": 2018,
+    "CreateDate": "2018-10-18",
+    "PMCID": "PMC6190665",
+    "NIHMSID": "",
+    "DOI": "10.1186/s13024-018-0289-x",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 30158114,
+    "Title": "TLR5 decoy receptor as a novel anti-amyloid therapeutic for Alzheimer's disease",
+    "Authors": "Chakrabarty P, Li A, Ladd TB, Strickland MR, Koller EJ, Burgess JD, Funk CC, Cruz PE, Allen M, Yaroshenko M, Wang X, Younkin C, Reddy J, Lohrer B, Mehrke L, Moore BD, Liu X, Ceballos-Diaz C, Rosario AM, Medway C, Janus C, Li HD, Dickson DW, Giasson BI, Price ND, Younkin SG, Ertekin-Taner N, Golde TE.",
+    "Citation": "J Exp Med. 2018 Sep 3;215(9):2247-2264. doi: 10.1084/jem.20180484.",
+    "FirstAuthor": "Chakrabarty P",
+    "JournalBook": "J Exp Med",
+    "PublicationYear": 2018,
+    "CreateDate": "2018-08-31",
+    "PMCID": "PMC6122970",
+    "NIHMSID": "",
+    "DOI": "10.1084/jem.20180484",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 30136084,
+    "Title": "Divergent brain gene expression patterns associate with distinct cell-specific tau neuropathology traits in progressive supranuclear palsy",
+    "Authors": "Allen M, Wang X, Serie DJ, Strickland SL, Burgess JD, Koga S, Younkin CS, Nguyen TT, Malphrus KG, Lincoln SJ, Alamprese M, Zhu K, Chang R, Carrasquillo MM, Kouri N, Murray ME, Reddy JS, Funk C, Price ND, Golde TE, Younkin SG, Asmann YW, Crook JE, Dickson DW, Ertekin-Taner N.",
+    "Citation": "Acta Neuropathol. 2018 Nov;136(5):709-727. doi: 10.1007/s00401-018-1900-5. Epub 2018 Aug 22.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Acta Neuropathol",
+    "PublicationYear": 2018,
+    "CreateDate": "2018-08-24",
+    "PMCID": "PMC6208732",
+    "NIHMSID": "",
+    "DOI": "10.1007/s00401-018-1900-5",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 29398119,
+    "Title": "Target-enriched sequencing of chromosome 17q21.31 in sporadic tauopathies reveals no candidate variants",
+    "Authors": "Razquin C, Ortega-Cubero S, Rojo-Bustamante E, Diez-Fairen M, Lorenzo E, Alonso E, Ezquerra M, Ross OA, Carcel M, Lorenzo-Betancor O, Soto AI, Burgess JD, Ertekin-Taner N, Dickson DW, Pastor MA, Tolosa E, Pastor P.",
+    "Citation": "Neurobiol Aging. 2018 Jun;66:177.e7-177.e10. doi: 10.1016/j.neurobiolaging.2017.12.026. Epub 2018 Jan 11.",
+    "FirstAuthor": "Razquin C",
+    "JournalBook": "Neurobiol Aging",
+    "PublicationYear": 2018,
+    "CreateDate": "2018-02-06",
+    "PMCID": "PMC6769418",
+    "NIHMSID": "NIHMS1050601",
+    "DOI": "10.1016/j.neurobiolaging.2017.12.026",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 29107053,
+    "Title": "Conserved brain myelination networks are altered in Alzheimer's and other neurodegenerative diseases",
+    "Authors": "Allen M, Wang X, Burgess JD, Watzlawik J, Serie DJ, Younkin CS, Nguyen T, Malphrus KG, Lincoln S, Carrasquillo MM, Ho C, Chakrabarty P, Strickland S, Murray ME, Swarup V, Geschwind DH, Seyfried NT, Dammer EB, Lah JJ, Levey AI, Golde TE, Funk C, Li H, Price ND, Petersen RC, Graff-Radford NR, Younkin SG, Dickson DW, Crook JR, Asmann YW, Ertekin-Taner N.",
+    "Citation": "Alzheimers Dement. 2018 Mar;14(3):352-366. doi: 10.1016/j.jalz.2017.09.012. Epub 2017 Oct 31.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2018,
+    "CreateDate": "2017-11-07",
+    "PMCID": "PMC5866744",
+    "NIHMSID": "NIHMS909621",
+    "DOI": "10.1016/j.jalz.2017.09.012",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 28714976,
+    "Title": "Rare coding variants in PLCG2, ABI3, and TREM2 implicate microglial-mediated innate immunity in Alzheimer's disease",
+    "Authors": "Sims R, van der Lee SJ, Naj AC, Bellenguez C, Badarinarayan N, Jakobsdottir J, Kunkle BW, Boland A, Raybould R, Bis JC, Martin ER, Grenier-Boley B, Heilmann-Heimbach S, Chouraki V, Kuzma AB, Sleegers K, Vronskaya M, Ruiz A, Graham RR, Olaso R, Hoffmann P, Grove ML, Vardarajan BN, Hiltunen M, N√∂then MM, White CC, Hamilton-Nelson KL, Epelbaum J, Maier W, Choi SH, Beecham GW, Dulary C, Herms S, Smith AV, Funk CC, Derbois C, Forstner AJ, Ahmad S, Li H, Bacq D, Harold D, Satizabal CL, Valladares O, Squassina A, Thomas R, Brody JA, Qu L, S√°nchez-Juan P, Morgan T, Wolters FJ, Zhao Y, Garcia FS, Denning N, Fornage M, Malamon J, Naranjo MCD, Majounie E, Mosley TH, Dombroski B, Wallon D, Lupton MK, Dupuis J, Whitehead P, Fratiglioni L, Medway C, Jian X, Mukherjee S, Keller L, Brown K, Lin H, Cantwell LB, Panza F, McGuinness B, Moreno-Grau S, Burgess JD, Solfrizzi V, Proitsi P, Adams HH, Allen M, Seripa D, Pastor P, Cupples LA, Price ND, Hannequin D, Frank-Garc√≠a A, Levy D, Chakrabarty P, Caffarra P, Giegling I, Beiser AS, Giedraitis V, Hampel H, Garcia ME, Wang X, Lannfelt L, Mecocci P, Eiriksdottir G, Crane PK, Pasquier F, Boccardi V, et al.",
+    "Citation": "Nat Genet. 2017 Sep;49(9):1373-1384. doi: 10.1038/ng.3916. Epub 2017 Jul 17.",
+    "FirstAuthor": "Sims R",
+    "JournalBook": "Nat Genet",
+    "PublicationYear": 2017,
+    "CreateDate": "2017-07-18",
+    "PMCID": "PMC5669039",
+    "NIHMSID": "NIHMS894471",
+    "DOI": "10.1038/ng.3916",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 28480329,
+    "Title": "African American exome sequencing identifies potential risk variants at Alzheimer disease loci",
+    "Authors": "N'Songo A, Carrasquillo MM, Wang X, Burgess JD, Nguyen T, Asmann YW, Serie DJ, Younkin SG, Allen M, Pedraza O, Duara R, Greig Custo MT, Graff-Radford NR, Ertekin-Taner N.",
+    "Citation": "Neurol Genet. 2017 Apr 7;3(2):e141. doi: 10.1212/NXG.0000000000000141. eCollection 2017 Apr.",
+    "FirstAuthor": "N'Songo A",
+    "JournalBook": "Neurol Genet",
+    "PublicationYear": 2017,
+    "CreateDate": "2017-05-09",
+    "PMCID": "PMC5406839",
+    "NIHMSID": "",
+    "DOI": "10.1212/NXG.0000000000000141",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 28242297,
+    "Title": "Systems biology approach to late-onset Alzheimer's disease genome-wide association study identifies novel candidate genes validated using brain expression data and Caenorhabditis elegans experiments",
+    "Authors": "Mukherjee S, Russell JC, Carr DT, Burgess JD, Allen M, Serie DJ, Boehme KL, Kauwe JSK, Naj AC, Fardo DW, Dickson DW, Montine TJ, Ertekin-Taner N, Kaeberlein MR, Crane PK.",
+    "Citation": "Alzheimers Dement. 2017 Oct;13(10):1133-1142. doi: 10.1016/j.jalz.2017.01.016. Epub 2017 Feb 24.",
+    "FirstAuthor": "Mukherjee S",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2017,
+    "CreateDate": "2017-03-01",
+    "PMCID": "PMC5568992",
+    "NIHMSID": "NIHMS883971",
+    "DOI": "10.1016/j.jalz.2017.01.016",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 28097223,
+    "Title": "ABCA7 loss-of-function variants, expression, and neurologic disease risk",
+    "Authors": "Allen M, Lincoln SJ, Corda M, Watzlawik JO, Carrasquillo MM, Reddy JS, Burgess JD, Nguyen T, Malphrus K, Petersen RC, Graff-Radford NR, Dickson DW, Ertekin-Taner N.",
+    "Citation": "Neurol Genet. 2017 Jan 5;3(1):e126. doi: 10.1212/NXG.0000000000000126. eCollection 2017 Feb.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Neurol Genet",
+    "PublicationYear": 2017,
+    "CreateDate": "2017-01-19",
+    "PMCID": "PMC5217615",
+    "NIHMSID": "",
+    "DOI": "10.1212/NXG.0000000000000126",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 27939925,
+    "Title": "A candidate regulatory variant at the TREM gene cluster associates with decreased Alzheimer's disease risk and increased TREML1 and TREM2 brain gene expression",
+    "Authors": "Carrasquillo MM, Allen M, Burgess JD, Wang X, Strickland SL, Aryal S, Siuda J, Kachadoorian ML, Medway C, Younkin CS, Nair A, Wang C, Chanana P, Serie D, Nguyen T, Lincoln S, Malphrus KG, Morgan K, Golde TE, Price ND, White CC, De Jager PL, Bennett DA, Asmann YW, Crook JE, Petersen RC, Graff-Radford NR, Dickson DW, Younkin SG, Ertekin-Taner N.",
+    "Citation": "Alzheimers Dement. 2017 Jun;13(6):663-673. doi: 10.1016/j.jalz.2016.10.005. Epub 2016 Dec 8.",
+    "FirstAuthor": "Carrasquillo MM",
+    "JournalBook": "Alzheimers Dement",
+    "PublicationYear": 2017,
+    "CreateDate": "2016-12-13",
+    "PMCID": "PMC5462884",
+    "NIHMSID": "NIHMS829845",
+    "DOI": "10.1016/j.jalz.2016.10.005",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 27727239,
+    "Title": "Human whole genome genotype and transcriptome data for Alzheimer's and other neurodegenerative diseases",
+    "Authors": "Allen M, Carrasquillo MM, Funk C, Heavner BD, Zou F, Younkin CS, Burgess JD, Chai HS, Crook J, Eddy JA, Li H, Logsdon B, Peters MA, Dang KK, Wang X, Serie D, Wang C, Nguyen T, Lincoln S, Malphrus K, Bisceglio G, Li M, Golde TE, Mangravite LM, Asmann Y, Price ND, Petersen RC, Graff-Radford NR, Dickson DW, Younkin SG, Ertekin-Taner N.",
+    "Citation": "Sci Data. 2016 Oct 11;3:160089. doi: 10.1038/sdata.2016.89.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Sci Data",
+    "PublicationYear": 2016,
+    "CreateDate": "2016-10-12",
+    "PMCID": "PMC5058336",
+    "NIHMSID": "",
+    "DOI": "10.1038/sdata.2016.89",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 27115769,
+    "Title": "Gene expression, methylation and neuropathology correlations at progressive supranuclear palsy risk loci",
+    "Authors": "Allen M, Burgess JD, Ballard T, Serie D, Wang X, Younkin CS, Sun Z, Kouri N, Baheti S, Wang C, Carrasquillo MM, Nguyen T, Lincoln S, Malphrus K, Murray M, Golde TE, Price ND, Younkin SG, Schellenberg GD, Asmann Y, Ordog T, Crook J, Dickson D, Ertekin-Taner N.",
+    "Citation": "Acta Neuropathol. 2016 Aug;132(2):197-211. doi: 10.1007/s00401-016-1576-7. Epub 2016 Apr 26.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Acta Neuropathol",
+    "PublicationYear": 2016,
+    "CreateDate": "2016-04-27",
+    "PMCID": "PMC4947429",
+    "NIHMSID": "NIHMS792973",
+    "DOI": "10.1007/s00401-016-1576-7",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 27066552,
+    "Title": "Late-onset Alzheimer disease risk variants mark brain regulatory loci",
+    "Authors": "Allen M, Kachadoorian M, Carrasquillo MM, Karhade A, Manly L, Burgess JD, Wang C, Serie D, Wang X, Siuda J, Zou F, Chai HS, Younkin C, Crook J, Medway C, Nguyen T, Ma L, Malphrus K, Lincoln S, Petersen RC, Graff-Radford NR, Asmann YW, Dickson DW, Younkin SG, Ertekin-Taner N.",
+    "Citation": "Neurol Genet. 2015 Jul 23;1(2):e15. doi: 10.1212/NXG.0000000000000012. eCollection 2015 Aug.",
+    "FirstAuthor": "Allen M",
+    "JournalBook": "Neurol Genet",
+    "PublicationYear": 2015,
+    "CreateDate": "2016-04-12",
+    "PMCID": "PMC4807909",
+    "NIHMSID": "",
+    "DOI": "10.1212/NXG.0000000000000012",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 25129075,
+    "Title": "Alzheimer's disease: early alterations in brain DNA methylation at ANK1, BIN1, RHBDF2 and other loci",
+    "Authors": "De Jager PL, Srivastava G, Lunnon K, Burgess J, Schalkwyk LC, Yu L, Eaton ML, Keenan BT, Ernst J, McCabe C, Tang A, Raj T, Replogle J, Brodeur W, Gabriel S, Chai HS, Younkin C, Younkin SG, Zou F, Szyf M, Epstein CB, Schneider JA, Bernstein BE, Meissner A, Ertekin-Taner N, Chibnik LB, Kellis M, Mill J, Bennett DA.",
+    "Citation": "Nat Neurosci. 2014 Sep;17(9):1156-63. doi: 10.1038/nn.3786. Epub 2014 Aug 17.",
+    "FirstAuthor": "De Jager PL",
+    "JournalBook": "Nat Neurosci",
+    "PublicationYear": 2014,
+    "CreateDate": "2014-08-18",
+    "PMCID": "PMC4292795",
+    "NIHMSID": "NIHMS614693",
+    "DOI": "10.1038/nn.3786",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Research Technician",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 21185624,
+    "Title": "Association of common KIBRA variants with episodic memory and AD risk",
+    "Authors": "Burgess JD, Pedraza O, Graff-Radford NR, Hirpa M, Zou F, Miles R, Nguyen T, Li M, Lucas JA, Ivnik RJ, Crook J, Pankratz VS, Dickson DW, Petersen RC, Younkin SG, Ertekin-Taner N.",
+    "Citation": "Neurobiol Aging. 2011 Mar;32(3):557.e1-9. doi: 10.1016/j.neurobiolaging.2010.11.004. Epub 2010 Dec 24.",
+    "FirstAuthor": "Burgess JD",
+    "JournalBook": "Neurobiol Aging",
+    "PublicationYear": 2011,
+    "CreateDate": "2010-12-28",
+    "PMCID": "PMC3065956",
+    "NIHMSID": "NIHMS262688",
+    "DOI": "10.1016/j.neurobiolaging.2010.11.004",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Undergraduate",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 20142614,
+    "Title": "Gene expression levels as endophenotypes in genome-wide association studies of Alzheimer disease",
+    "Authors": "Zou F, Carrasquillo MM, Pankratz VS, Belbin O, Morgan K, Allen M, Wilcox SL, Ma L, Walker LP, Kouri N, Burgess JD, Younkin LH, Younkin SG, Younkin CS, Bisceglio GD, Crook JE, Dickson DW, Petersen RC, Graff-Radford N, Younkin SG, Ertekin-Taner N.",
+    "Citation": "Neurology. 2010 Feb 9;74(6):480-6. doi: 10.1212/WNL.0b013e3181d07654.",
+    "FirstAuthor": "Zou F",
+    "JournalBook": "Neurology",
+    "PublicationYear": 2010,
+    "CreateDate": "2010-02-10",
+    "PMCID": "PMC2830916",
+    "NIHMSID": "",
+    "DOI": "10.1212/WNL.0b013e3181d07654",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Undergraduate",
+    "EmploymentAtTime": "Mayo Clinic - Ertekin-Taner Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 29375828,
+    "Title": "Co-occurrence of a novel PDGFRB variant and likely pathogenic variant in CASR in an individual with extensive intracranial calcifications and hypocalcaemia",
+    "Authors": "DeMeo NN, Burgess JD, Blackburn PR, Gass JM, Richter J, Atwal HK, van Gerpen JA, Atwal PS.",
+    "Citation": "Clin Case Rep. 2017 Nov 20;6(1):8-13. doi: 10.1002/ccr3.1265. eCollection 2018 Jan.",
+    "FirstAuthor": "DeMeo NN",
+    "JournalBook": "Clin Case Rep",
+    "PublicationYear": 2017,
+    "CreateDate": "2018-01-30",
+    "PMCID": "PMC5771904",
+    "NIHMSID": "",
+    "DOI": "10.1002/ccr3.1265",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - Center for Individualized Medicine",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Other diseases"
+  },
+
+  {
+    "PMID": 39075600,
+    "Title": "Secretome from iPSC-derived MSCs exerts proangiogenic and immunosuppressive effects to alleviate radiation-induced vascular endothelial cell damage",
+    "Authors": "Gupta K, Perkerson RB 3rd, Parsons TM, Angom R, Amerna D, Burgess JD, Ren Y, McLean PJ, Mukhopadhyay D, Vibhute P, Wszolek ZK, Zubair AC, Qui√±ones-Hinojosa A, Kanekiyo T.",
+    "Citation": "Stem Cell Res Ther. 2024 Jul 29;15(1):230. doi: 10.1186/s13287-024-03847-5.",
+    "FirstAuthor": "Gupta K",
+    "JournalBook": "Stem Cell Res Ther",
+    "PublicationYear": 2024,
+    "CreateDate": "2024-07-29",
+    "PMCID": "PMC11287895",
+    "NIHMSID": "",
+    "DOI": "10.1186/s13287-024-03847-5",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Other diseases"
+  },
+
+  {
+    "PMID": 37798772,
+    "Title": "A mutant methionyl-tRNA synthetase-based toolkit to assess induced-mesenchymal stromal cell secretome in mixed-culture disease models",
+    "Authors": "Burgess JD, Amerna D, Norton ES, Parsons TM, Perkerson RB 3rd, Faroqi AH, Wszolek ZK, Guerrero Cazares H, Kanekiyo T, Delenclos M, McLean PJ.",
+    "Citation": "Stem Cell Res Ther. 2023 Oct 5;14(1):289. doi: 10.1186/s13287-023-03515-0.",
+    "FirstAuthor": "Burgess JD",
+    "JournalBook": "Stem Cell Res Ther",
+    "PublicationYear": 2023,
+    "CreateDate": "2023-10-05",
+    "PMCID": "PMC10557244",
+    "NIHMSID": "",
+    "DOI": "10.1186/s13287-023-03515-0",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Methods and toolkits"
+  },
+
+  {
+    "PMID": 37637959,
+    "Title": "Honokiol decreases alpha-synuclein mRNA levels and reveals novel targets for modulating alpha-synuclein expression",
+    "Authors": "Fagen SJ, Burgess JD, Lim MJ, Amerna D, Kaya ZB, Faroqi AH, Perisetla P, DeMeo NN, Stojkovska I, Quiriconi DJ, Mazzulli JR, Delenclos M, Boschen SL, McLean PJ.",
+    "Citation": "Front Aging Neurosci. 2023 Aug 10;15:1179086. doi: 10.3389/fnagi.2023.1179086. eCollection 2023.",
+    "FirstAuthor": "Fagen SJ",
+    "JournalBook": "Front Aging Neurosci",
+    "PublicationYear": 2023,
+    "CreateDate": "2023-08-28",
+    "PMCID": "PMC10449643",
+    "NIHMSID": "",
+    "DOI": "10.3389/fnagi.2023.1179086",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Parkinson's and synucleinopathy"
+  },
+
+  {
+    "PMID": 37205579,
+    "Title": "A Mutant Methionyl-tRNA Synthetase-Based toolkit to assess induced-Mesenchymal Stromal Cell secretome in mixed-culture disease models",
+    "Authors": "Burgess JD, Amerna D, Norton ES, Parsons TM, Perkerson RB 3rd, Faroqi AH, Wszolek ZK, Cazares HG, Kanekiyo T, Delenclos M, McLean PJ.",
+    "Citation": "Res Sq [Preprint]. 2023 May 3:rs.3.rs-2838195. doi: 10.21203/rs.3.rs-2838195/v1.",
+    "FirstAuthor": "Burgess JD",
+    "JournalBook": "Res Sq",
+    "PublicationYear": 2023,
+    "CreateDate": "2023-05-19",
+    "PMCID": "PMC10187403",
+    "NIHMSID": "",
+    "DOI": "10.21203/rs.3.rs-2838195/v1",
+    "Exclude": true,
+    "Preprint": true,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Methods and toolkits"
+  },
+
+  {
+    "PMID": 35471463,
+    "Title": "APOE4 exacerbates alpha-synuclein seeding activity and contributes to neurotoxicity in Alzheimer's disease with Lewy body pathology",
+    "Authors": "Jin Y, Li F, Sonoustoun B, Kondru NC, Martens YA, Qiao W, Heckman MG, Ikezu TC, Li Z, Burgess JD, Amerna D, O'Leary J, DeTure MA, Zhao J, McLean PJ, Dickson DW, Ross OA, Bu G, Zhao N.",
+    "Citation": "Acta Neuropathol. 2022 Jun;143(6):641-662. doi: 10.1007/s00401-022-02421-8. Epub 2022 Apr 26.",
+    "FirstAuthor": "Jin Y",
+    "JournalBook": "Acta Neuropathol",
+    "PublicationYear": 2022,
+    "CreateDate": "2022-04-26",
+    "PMCID": "PMC9107450",
+    "NIHMSID": "",
+    "DOI": "10.1007/s00401-022-02421-8",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": true,
+    "Review": false,
+    "topic": "Alzheimer's and dementia"
+  },
+
+  {
+    "PMID": 32935624,
+    "Title": "In Vivo Detection of Extracellular Adenosine Triphosphate in a Mouse Model of Traumatic Brain Injury",
+    "Authors": "Faroqi AH, Lim MJ, Kee EC, Lee JH, Burgess JD, Chen R, Di Virgilio F, Delenclos M, McLean PJ.",
+    "Citation": "J Neurotrauma. 2021 Mar;38(5):655-664. doi: 10.1089/neu.2020.7226. Epub 2020 Oct 19.",
+    "FirstAuthor": "Faroqi AH",
+    "JournalBook": "J Neurotrauma",
+    "PublicationYear": 2021,
+    "CreateDate": "2020-09-16",
+    "PMCID": "PMC7898407",
+    "NIHMSID": "",
+    "DOI": "10.1089/neu.2020.7226",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Methods and toolkits"
+  },
+
+  {
+    "PMID": 31931835,
+    "Title": "Alpha-synuclein-induced mitochondrial dysfunction is mediated via a sirtuin 3-dependent pathway",
+    "Authors": "Park JH, Burgess JD, Faroqi AH, DeMeo NN, Fiesel FC, Springer W, Delenclos M, McLean PJ.",
+    "Citation": "Mol Neurodegener. 2020 Jan 13;15(1):5. doi: 10.1186/s13024-019-0349-x.",
+    "FirstAuthor": "Park JH",
+    "JournalBook": "Mol Neurodegener",
+    "PublicationYear": 2020,
+    "CreateDate": "2020-01-15",
+    "PMCID": "PMC6956494",
+    "NIHMSID": "",
+    "DOI": "10.1186/s13024-019-0349-x",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": false,
+    "topic": "Parkinson's and synucleinopathy"
+  },
+
+  {
+    "PMID": 31265132,
+    "Title": "Cellular models of alpha-synuclein toxicity and aggregation",
+    "Authors": "Delenclos M, Burgess JD, Lamprokostopoulou A, Outeiro TF, Vekrellis K, McLean PJ.",
+    "Citation": "J Neurochem. 2019 Sep;150(5):566-576. doi: 10.1111/jnc.14806. Epub 2019 Jul 30.",
+    "FirstAuthor": "Delenclos M",
+    "JournalBook": "J Neurochem",
+    "PublicationYear": 2019,
+    "CreateDate": "2019-07-03",
+    "PMCID": "PMC8864560",
+    "NIHMSID": "NIHMS1608568",
+    "DOI": "10.1111/jnc.14806",
+    "Exclude": false,
+    "Preprint": false,
+    "CareerStage": "Graduate Student",
+    "EmploymentAtTime": "Mayo Clinic - McLean Lab",
+    "Collaboration": false,
+    "Review": true,
+    "topic": "Parkinson's and synucleinopathy"
+  },
+];
+// Modified JavaScript for publication rendering and filtering by group
+// Handles grouping by CareerStage, Lab (EmploymentAtTime), and topic
+// Default: all entries reverse chronologically
+
+let selectedType = "All";
+let selectedTags = new Set();
+
+function sortPublicationsDescending(pubs) {
+  return pubs.sort((a, b) => new Date(b.CreateDate) - new Date(a.CreateDate));
+}
+
+// -- Helper for grouping with array-valued group keys --
+function groupPublications(publications, groupBy) {
+  const grouped = {};
+  publications.forEach(pub => {
+    // Special handling for topic grouping: topic can be an array or a string
+    if (groupBy === 'topic') {
+      let topics = pub.topic;
+      if (Array.isArray(topics)) {
+        topics.forEach(topic => {
+          const key = topic || 'Other';
           if (!grouped[key]) grouped[key] = [];
           grouped[key].push(pub);
         });
+      } else {
+        const key = topics || 'Other';
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(pub);
       }
-
-      for (const [group, pubs] of Object.entries(grouped)) {
-        const groupEl = document.createElement('div');
-        groupEl.classList.add('publication-group');
-
-        const heading = document.createElement('div');
-        heading.classList.add('group-heading');
-        heading.textContent = group;
-        groupEl.appendChild(heading);
-
-        pubs.forEach(pub => {
-          const div = document.createElement('div');
-          div.classList.add('publication');
-          div.innerHTML = `<strong>${pub.Title}</strong><br><em>${pub.Authors}</em><br>${pub.Citation}`;
-          groupEl.appendChild(div);
-        });
-
-        container.appendChild(groupEl);
-      }
+    } else {
+      let key = pub[groupBy];
+      key = key || 'Other';
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(pub);
     }
+  });
+  return grouped;
+}
 
-    document.querySelectorAll('input[name="grouping"]').forEach(radio => {
-      radio.addEventListener('change', e => {
-        renderPublications(e.target.value);
+function renderPublications(groupBy = null) {
+  const container = document.getElementById('publication-list');
+  container.innerHTML = '';
+
+  let grouped = {};
+  let sortedGroups;
+  if (!groupBy || groupBy === 'all') {
+    grouped['All Publications'] = [...publications].sort((a, b) => {
+      const yearDiff = b.PublicationYear - a.PublicationYear;
+      if (yearDiff !== 0) return yearDiff;
+      return new Date(b.CreateDate) - new Date(a.CreateDate);
+    });
+    sortedGroups = Object.entries(grouped);
+  } else if (groupBy === 'CareerStage') {
+    grouped = groupPublications(publications, groupBy);
+    const order = ["Graduate Student", "Research Technician", "Undergraduate"];
+    for (const key in grouped) {
+      grouped[key] = grouped[key].sort((a, b) => {
+        const yearDiff = b.PublicationYear - a.PublicationYear;
+        if (yearDiff !== 0) return yearDiff;
+        return new Date(b.CreateDate) - new Date(a.CreateDate);
       });
+    }
+    sortedGroups = order
+      .filter(key => grouped[key] && grouped[key].length)
+      .map(key => [key, grouped[key]])
+      .concat(Object.entries(grouped).filter(([key]) => !order.includes(key)));
+  } else if (groupBy === 'EmploymentAtTime') {
+    grouped = groupPublications(publications, groupBy);
+    const order = [
+      "Mayo Clinic - McLean Lab",
+      "Mayo Clinic - Center for Individualized Medicine",
+      "Mayo Clinic - Ertekin-Taner Lab"
+    ];
+    for (const key in grouped) {
+      grouped[key] = grouped[key].sort((a, b) => {
+        const yearDiff = b.PublicationYear - a.PublicationYear;
+        if (yearDiff !== 0) return yearDiff;
+        return new Date(b.CreateDate) - new Date(a.CreateDate);
+      });
+    }
+    sortedGroups = order
+      .filter(key => grouped[key] && grouped[key].length)
+      .map(key => [key, grouped[key]])
+      .concat(Object.entries(grouped).filter(([key]) => !order.includes(key)));
+  } else if (groupBy === 'topic') {
+    grouped = groupPublications(publications, groupBy);
+    for (const key in grouped) {
+      grouped[key] = grouped[key].sort((a, b) => {
+        const yearDiff = b.PublicationYear - a.PublicationYear;
+        if (yearDiff !== 0) return yearDiff;
+        return new Date(b.CreateDate) - new Date(a.CreateDate);
+      });
+    }
+    sortedGroups = Object.entries(grouped).sort((a, b) => a[0].localeCompare(b[0]));
+  } else {
+    grouped['All Publications'] = [...publications].sort((a, b) => {
+      const yearDiff = b.PublicationYear - a.PublicationYear;
+      if (yearDiff !== 0) return yearDiff;
+      return new Date(b.CreateDate) - new Date(a.CreateDate);
+    });
+    sortedGroups = Object.entries(grouped);
+  }
+
+  // Render each group as collapsible and initially hidden
+  for (const [group, pubs] of sortedGroups) {
+    if (!pubs || pubs.length === 0) continue;
+    const groupEl = document.createElement('div');
+    groupEl.classList.add('publication-group');
+
+    // Create group header
+    const groupHeader = document.createElement('div');
+    groupHeader.classList.add('group-heading');
+    groupHeader.innerHTML = `<span class="triangle">&#9654;</span> ${group} (${pubs.length})`;
+
+    // Create content container
+    const content = document.createElement('div');
+    content.classList.add('publications-container');
+    content.style.display = (group === 'All Publications') ? 'block' : 'none';
+
+    pubs.forEach(pub => {
+      const div = document.createElement('div');
+      div.classList.add('publication');
+      div.innerHTML = `<strong>${pub.Title}</strong><br><em>${pub.Authors}</em><br>${pub.Citation}`;
+      content.appendChild(div);
     });
 
-     <!-- ========== JS: Mobile Menu Toggle ========== -->
+    // Set triangle rotation for default open group
+    if (group === 'All Publications') {
+      const triangle = groupHeader.querySelector('.triangle');
+      if (triangle) triangle.style.transform = 'rotate(90deg)';
+    }
+
+    groupHeader.addEventListener("click", () => {
+      const isVisible = content.style.display === "block";
+      content.style.display = isVisible ? "none" : "block";
+      const triangle = groupHeader.querySelector(".triangle");
+      triangle.style.transform = isVisible ? "rotate(0deg)" : "rotate(90deg)";
+    });
+
+    groupEl.appendChild(groupHeader);
+    groupEl.appendChild(content);
+    container.appendChild(groupEl);
+  }
+}
+
+document.querySelectorAll('input[name="grouping"]').forEach(radio => {
+  radio.addEventListener('change', e => {
+    let value = e.target.value;
+    if (value === 'CareerStage') {
+      renderPublications('CareerStage');
+    } else if (value === 'Lab') {
+      renderPublications('EmploymentAtTime');
+    } else if (value === 'topic') {
+      renderPublications('topic');
+    } else {
+      renderPublications('all');
+    }
+  });
+});
+
+// Mobile Menu Toggle
+// ========== JS: Mobile Menu Toggle ==========
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("menu-toggle");
   const navLinks = document.getElementById("nav-links");
@@ -137,16 +876,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggleBtn.addEventListener("click", () => {
     navLinks.classList.toggle("open");
-
-    // Swap icon
     icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
   });
+
+  // Initial render
+  renderPublications('all');
 });
+
 </script>
 
  
 
 
 
+<style>
+/* No additional styles needed for group-heading/collapsing */
+</style>
 </body>
 </html>
