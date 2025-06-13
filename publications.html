@@ -41,6 +41,27 @@
       margin-right: 0.5rem;
     }
 
+    .pub-links {
+      margin-top: 0.3rem;
+    }
+
+    .doi-tag, .pmid-tag {
+      text-decoration: none;
+      padding: 2px 6px;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+
+    .doi-tag {
+      background-color: #452244;
+      color: white;
+    }
+
+    .pmid-tag {
+      background-color: #007acc;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -542,7 +563,7 @@ const publications = [
   {
     "PMID": 39075600,
     "Title": "Secretome from iPSC-derived MSCs exerts proangiogenic and immunosuppressive effects to alleviate radiation-induced vascular endothelial cell damage",
-    "Authors": "Gupta K, Perkerson RB 3rd, Parsons TM, Angom R, Amerna D, Burgess JD, Ren Y, McLean PJ, Mukhopadhyay D, Vibhute P, Wszolek ZK, Zubair AC, Qui√±ones-Hinojosa A, Kanekiyo T.",
+    "Authors": "Gupta K, Perkerson RB III, Parsons TM, Angom R, Amerna D, Burgess JD, Ren Y, McLean PJ, Mukhopadhyay D, Vibhute P, Wszolek ZK, Zubair AC, Quiñones-Hinojosa A, Kanekiyo T.",
     "Citation": "Stem Cell Res Ther. 2024 Jul 29;15(1):230. doi: 10.1186/s13287-024-03847-5.",
     "FirstAuthor": "Gupta K",
     "JournalBook": "Stem Cell Res Ther",
@@ -563,7 +584,7 @@ const publications = [
   {
     "PMID": 37798772,
     "Title": "A mutant methionyl-tRNA synthetase-based toolkit to assess induced-mesenchymal stromal cell secretome in mixed-culture disease models",
-    "Authors": "Burgess JD, Amerna D, Norton ES, Parsons TM, Perkerson RB 3rd, Faroqi AH, Wszolek ZK, Guerrero Cazares H, Kanekiyo T, Delenclos M, McLean PJ.",
+    "Authors": "Burgess JD, Amerna D, Norton ES, Parsons TM, Perkerson RB III, Faroqi AH, Wszolek ZK, Guerrero Cazares H, Kanekiyo T, Delenclos M, McLean PJ.",
     "Citation": "Stem Cell Res Ther. 2023 Oct 5;14(1):289. doi: 10.1186/s13287-023-03515-0.",
     "FirstAuthor": "Burgess JD",
     "JournalBook": "Stem Cell Res Ther",
@@ -750,17 +771,20 @@ function renderPublications(groupBy = null) {
   const container = document.getElementById('publication-list');
   container.innerHTML = '';
 
+  // Filter out excluded publications
+  const visiblePublications = publications.filter(pub => !pub.Exclude);
+
   let grouped = {};
   let sortedGroups;
   if (!groupBy || groupBy === 'all') {
-    grouped['All Publications'] = [...publications].sort((a, b) => {
+    grouped['All Publications'] = [...visiblePublications].sort((a, b) => {
       const yearDiff = b.PublicationYear - a.PublicationYear;
       if (yearDiff !== 0) return yearDiff;
       return new Date(b.CreateDate) - new Date(a.CreateDate);
     });
     sortedGroups = Object.entries(grouped);
   } else if (groupBy === 'CareerStage') {
-    grouped = groupPublications(publications, groupBy);
+    grouped = groupPublications(visiblePublications, groupBy);
     const order = ["Graduate Student", "Research Technician", "Undergraduate"];
     for (const key in grouped) {
       grouped[key] = grouped[key].sort((a, b) => {
@@ -774,7 +798,7 @@ function renderPublications(groupBy = null) {
       .map(key => [key, grouped[key]])
       .concat(Object.entries(grouped).filter(([key]) => !order.includes(key)));
   } else if (groupBy === 'EmploymentAtTime') {
-    grouped = groupPublications(publications, groupBy);
+    grouped = groupPublications(visiblePublications, groupBy);
     const order = [
       "Mayo Clinic - McLean Lab",
       "Mayo Clinic - Center for Individualized Medicine",
@@ -792,7 +816,7 @@ function renderPublications(groupBy = null) {
       .map(key => [key, grouped[key]])
       .concat(Object.entries(grouped).filter(([key]) => !order.includes(key)));
   } else if (groupBy === 'topic') {
-    grouped = groupPublications(publications, groupBy);
+    grouped = groupPublications(visiblePublications, groupBy);
     for (const key in grouped) {
       grouped[key] = grouped[key].sort((a, b) => {
         const yearDiff = b.PublicationYear - a.PublicationYear;
@@ -802,7 +826,7 @@ function renderPublications(groupBy = null) {
     }
     sortedGroups = Object.entries(grouped).sort((a, b) => a[0].localeCompare(b[0]));
   } else {
-    grouped['All Publications'] = [...publications].sort((a, b) => {
+    grouped['All Publications'] = [...visiblePublications].sort((a, b) => {
       const yearDiff = b.PublicationYear - a.PublicationYear;
       if (yearDiff !== 0) return yearDiff;
       return new Date(b.CreateDate) - new Date(a.CreateDate);
@@ -829,7 +853,19 @@ function renderPublications(groupBy = null) {
     pubs.forEach(pub => {
       const div = document.createElement('div');
       div.classList.add('publication');
-      div.innerHTML = `<strong>${pub.Title}</strong><br><em>${pub.Authors}</em><br>${pub.Citation}`;
+      div.style.marginTop = '0.5rem';
+      // Highlight "Burgess J" or "Burgess JD" in Authors
+      const highlightedAuthors = pub.Authors.replace(/\bBurgess J(D)?\b/g, '<u><strong>Burgess J$1</strong></u>');
+      // Add PubMed and DOI tags below citation
+      const pubmedLink = pub.PMID ? `https://pubmed.ncbi.nlm.nih.gov/${pub.PMID}` : null;
+      const doiLink = pub.DOI ? `https://doi.org/${pub.DOI}` : null;
+      const links = `
+        <div class="pub-links">
+          ${doiLink ? `<a class="doi-tag" href="${doiLink}" target="_blank">Journal</a>` : ""}
+          ${pubmedLink ? `<a class="pmid-tag" href="${pubmedLink}" target="_blank">PubMed</a>` : ""}
+        </div>
+      `;
+      div.innerHTML = `<strong style="color:#452244">${pub.Title}</strong><br><em style="color:#007acc">${highlightedAuthors}</em><br>${pub.Citation}${links}`;
       content.appendChild(div);
     });
 
