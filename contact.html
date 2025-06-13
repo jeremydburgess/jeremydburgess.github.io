@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <title>Contact | Jeremy Burgess</title>
+  <style>
+  @media (max-width: 640px) {
+    #contact-form input,
+    #contact-form textarea {
+      width: 95% !important;
+    }
+
+    #contact-form div {
+      flex-direction: column;
+    }
+
+    #contact-form button {
+      width: 100%;
+    }
+  }
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -31,8 +47,29 @@
   </header>
   <main class="container page-content">
     <h1>Contact</h1>
-    <p>You’ll be able to reach out directly via email or contact form from this page in the future.</p>
-  </main>
+   <form id="contact-form" style="max-width: 600px; margin-top: 1rem;">
+  <label for="name">Your name:</label><br />
+  <input type="text" name="name" required style="width: 100%; padding: 8px; margin-bottom: 1rem;"><br />
+  
+    <label for="email">Your email:</label><br />
+  <input type="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 1rem;"><br />
+
+  <label for="subject">Subject:</label><br />
+  <input type="text" name="subject" required style="width: 100%; padding: 8px; margin-bottom: 1rem;"><br />
+
+  <label for="message">Message:</label><br />
+  <textarea name="message" rows="8" required style="width: 100%; padding: 8px; margin-bottom: 1rem;"></textarea><br />
+
+  <div style="display: flex; gap: 1rem;">
+    <button type="submit" style="padding: 10px 20px; background: #452244; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Send
+    </button>
+    <button type="reset" style="padding: 10px 20px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Clear
+    </button>
+  </div>
+  <p id="form-status" style="margin-top: 1rem;"></p><p id="form-status" style="margin-top: 1rem;"></p>
+     </main>
   <footer>
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
@@ -44,6 +81,35 @@
       toggleBtn.addEventListener("click", () => {
         navLinks.classList.toggle("open");
         icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+      });
+
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("form-status");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const endpoint = "https://formspree.io/f/mkgbradp";
+
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            body: data,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            status.textContent = "Thank you! Your message has been sent.";
+            form.reset();
+          } else {
+            const result = await response.json();
+            status.textContent = result.error || "Oops! Something went wrong.";
+          }
+        } catch (error) {
+          status.textContent = "Oops! There was a problem sending your message.";
+        }
       });
     });
   </script>
