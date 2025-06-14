@@ -5,41 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <title>Home | Jeremy Burgess</title>
+  <style>
+.about-me-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.headshot {
+  height: 150px;
+  border-radius: 12px;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  order: -1; /* Ensures it appears first when stacked */
+}
+
+.about-me-text {
+  flex: 1;
+}
+
+@media (max-width: 400px) {
+  .about-me-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .headshot {
+    margin: 0 0 1rem 0; /* bottom margin only */
+    display: block;
+  }
+}
+  </style>
 </head>
 
 <body>
 
   <!-- ========== HEADER ========== -->
-<header class="site-header">
-  <div class="container header-row">
-    <!-- Left: Hamburger, Title, Nav -->
-    <div class="header-left">
-      <!-- Hamburger for mobile -->
-      <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
-        <span class="hamburger-icon">☰</span>
-      </button>
-
-      <!-- Title -->
-      <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
-
-      <!-- Navigation (ID is important!) -->
-      <nav class="nav-links" id="nav-links">
-        <a href="cv.html">CV</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="tools.html">Lab Tools</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="header-left">
+        <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">
+          <span class="hamburger-icon">☰</span>
+        </button>
+        <a href="index.html" class="site-title">Jeremy Burgess, Ph.D.</a>
+        <nav class="nav-links" id="nav-links">
+          <a href="cv.html">CV</a>
+          <a href="research.html">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="tools.html">Lab Tools</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="site-logo">
+          <img src="assets/image/white.svg" alt="Site logo" />
+        </a>
+      </div>
     </div>
-
-    <!-- Right: Logo -->
-    <div class="header-right">
-      <a href="index.html" class="site-logo">
-        <img src="assets/image/white.svg" alt="Site logo" />
-      </a>
-    </div>
-  </div>
-</header>
+  </header>
 
   <!-- ========== MAIN CONTENT ========== -->
   <main class="container page-content">
@@ -47,30 +69,35 @@
 
     <section>
       <h2 style="margin-top: 2rem;">About Me</h2>
-      <p>
-        I’m a postdoctoral research associate and <a href = "https://reporter.nih.gov/search/pgqospeC3kSI4v1L8h-VwA/project-details/11032869" target="_blank" rel="noopener noreferrer">NIA K00 fellow</a>, training with 
-        <a href="http://phanstiel-lab.med.unc.edu" target="_blank" rel="noopener noreferrer">Dr. Douglas Phanstiel</a> 
-        at the University of North Carolina at Chapel Hill. I’m interested in developing and applying complex 
-        iPSC-derived tools and models to explore the interplay between genetics, proteomics, and cellular dynamics 
-        in neurodegenerative disease.
-      </p>
+      <div class="about-me-container">
+                <img src="assets/image/headshot1.jpg" alt="Jeremy Burgess headshot" class="headshot">
 
-      <div style="background-color:#f1f1f1; border-left: 5px solid #452244; padding: 1rem; margin: 1rem 0;">
-        <a href="research.html">
-          <strong>Research Focus:</strong></a> Using iPSC-derived models and multi-omic profiling to explore Alzheimer’s disease mechanisms.
-        </a>
+        <div class="about-me-text">
+          <p>
+            I’m a postdoctoral research associate and <a href="https://www.nia.nih.gov/research/training/k00-pathway-independent-research-careers" target="_blank" rel="noopener noreferrer">NIA K00 fellow</a>, training with 
+            <a href="http://phanstiel-lab.med.unc.edu" target="_blank" rel="noopener noreferrer">Dr. Douglas Phanstiel</a> 
+            at the University of North Carolina at Chapel Hill. I’m interested in developing and applying complex 
+            iPSC-derived tools and models to explore the interplay between genetics, proteomics, and cellular dynamics 
+            in neurodegenerative disease. 
+          </p>
+
+          <div style="background-color:#f1f1f1; border-left: 5px solid #452244; padding: 1rem; margin: 1rem 0;">
+            <a href="research.html" style="text-decoration: none; color: inherit;">
+              <strong style="color:#452244">Research Focus:</strong> Using iPSC-derived models and multi-omic profiling to 
+              explore Alzheimer’s disease mechanisms.
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
     <section>
       <h2 style="margin-top: 2rem;">Research Journey</h2>
-
       <p>
         Over the course of my career, I’ve followed a diverse and evolving path through neuroscience research. 
         As an undergraduate, I built a strong foundation in theoretical and behavioral neuroscience. During a brief graduate program, 
         I gained hands-on experience with in vivo systems before shifting focus to molecular and genetic approaches.
       </p>
-
       <p>
         As a research technician with 
         <a href="https://www.mayo.edu/research/faculty/ertekin-taner-nilufer-m-d-ph-d/bio-00027318" target="_blank" rel="noopener noreferrer">Dr. Nilufer Ertekin-Taner</a> 
@@ -78,7 +105,6 @@
         <a href="https://www.mayo.edu/research/labs/genetics-of-alzheimers-disease-and-endophenotypes" target="_blank" rel="noopener noreferrer">Genetics of Alzheimer's Disease and Endophenotypes Laboratory</a> 
         at the Mayo Clinic, I studied the integration of Alzheimer’s disease genetics with endophenotypes.
       </p>
-
       <p>
         I then entered the Mayo Clinic Graduate School of Biomedical Sciences and pursued my Ph.D. in 
         <a href="https://www.mayo.edu/research/faculty/mclean-pam-j-ph-d/bio-00055201" target="_blank" rel="noopener noreferrer">Dr. Pamela McLean's</a> 
@@ -86,7 +112,6 @@
         developing iPSC-derived models of synucleinopathy and exploring cell-type-specific regenerative mechanisms 
         in response to synocleinopathy-memetic conditions.
       </p>
-
       <p>
         Now, as a postdoctoral researcher in the 
         <a href="http://phanstiel-lab.med.unc.edu" target="_blank" rel="noopener noreferrer">Phanstiel Lab</a> 
@@ -94,28 +119,26 @@
         Across each stage, I’ve refined my focus toward understanding how genetics, cell identity, and disease processes converge — 
         and I’m now laying the groundwork for my independent research program.
       </p>
-      <div style="background-color:#f1f1f1; border-left: 5px solid #007acc; padding: 1rem; margin: 1rem 0;">
+      <div style="background-color:#f1f1f1; border-left: 5px solid #007acc; padding: 1rem; margin-top: 1rem;">
         For a deeper look at my academic background and research training, see the <a href="cv.html">CV page</a>.
       </div>
     </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
   <footer>
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    const icon = toggleBtn.querySelector(".hamburger-icon");
-    toggleBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
-      icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+      const icon = toggleBtn.querySelector(".hamburger-icon");
+      toggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+        icon.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
