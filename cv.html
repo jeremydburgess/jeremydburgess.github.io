@@ -4,7 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <title>CV | Jeremy Burgess</title>
+  <title>About | Jeremy Burgess</title>
+  <style>
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    details[open] summary::after {
+      content: " ▲";
+    }
+    summary::after {
+      content: " ▼";
+      float: right;
+    }
+    details > div {
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -29,13 +47,76 @@
       </div>
     </div>
   </header>
+
   <main class="container page-content">
-    <h1>Curriculum Vitae</h1>
-    <p>This page will host a downloadable version of my CV and key highlights of my academic and professional experience.</p>
+    <h2>Snapshot CV</h2>
+
+    <details open>
+      <summary>Employment and Education</summary>
+      <div>
+        <strong>Postdoctoral Research Fellow</strong><br>
+        [Lab Name], [Institution] — 2023–Present<br><br>
+
+        <strong>Ph.D., Neuroscience</strong><br>
+        [University], 2018–2023<br><br>
+
+        <strong>B.A., Biology</strong><br>
+        [University], 2014–2017
+      </div>
+    </details>
+
+    <details>
+      <summary>Research Experience</summary>
+      <div>
+        <strong>Postdoctoral Fellow – [Institution]</strong><br>
+        Focused on tauopathy modeling in brain organoids, single-cell omics, and humanized in vitro disease systems.<br><br>
+
+        <strong>Graduate Researcher – [Institution]</strong><br>
+        Worked on synaptic development, transcriptomic analysis, and CRISPR-based gene regulation.<br><br>
+
+        <strong>Research Intern – [Institution]</strong><br>
+        Conducted basic molecular biology experiments contributing to early neurodegeneration studies.
+      </div>
+    </details>
+
+    <details>
+      <summary>Grants & Fellowships</summary>
+      <div>
+        <strong>K00 NIH Pathway to Independence Award</strong><br>
+        National Institute on Aging, 2024–2026<br><br>
+
+        <strong>NSF Graduate Research Fellowship</strong><br>
+        2018–2021
+      </div>
+    </details>
+
+    <details>
+      <summary>Teaching & Mentorship</summary>
+      <div>
+        <strong>Mentor, Undergraduate Summer Research Program</strong><br>
+        Guided students through cell culture and CRISPR editing workflows.<br><br>
+
+        <strong>Teaching Assistant – Advanced Molecular Neuroscience</strong><br>
+        Led discussion sections and lab activities; created supplementary materials.
+      </div>
+    </details>
+
+    <details>
+      <summary>Service & Outreach</summary>
+      <div>
+        <strong>Reviewer, Journal of Neuroscience</strong><br>
+        Reviewed manuscripts in cellular modeling and imaging-based quantification.<br><br>
+
+        <strong>Science Communication Volunteer</strong><br>
+        Presented research at public outreach events and school visits.
+      </div>
+    </details>
   </main>
+
   <footer>
     &copy; 2025 Jeremy Burgess. All rights reserved.
   </footer>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const toggleBtn = document.getElementById("menu-toggle");
